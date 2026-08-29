@@ -98,7 +98,7 @@ public sealed class MapCanvas : Control
         {
             float x = MapToScreenX(p.X);
             float y = MapToScreenY(p.Y);
-            using var outline = new Pen(Color.Black, 4);
+            using var outline = new Pen(Color.Black, 3);
             using var pen = new Pen(Color.Red, 1);
             g.DrawLine(outline, x - 10, y, x + 10, y);
             g.DrawLine(outline, x, y - 10, x, y + 10);
