@@ -1,0 +1,18 @@
+bin/
+bin-*/
+obj/
+obj-*/
+dist/
+.vs/
+*.user
+*.suo
+
+# 本地分析与生成内容
+exe-analysis/
+crystal-graph/
+graphify-out/
+
+# 本地运行日志与备份
+*.log
+*.bak
+*.tmp

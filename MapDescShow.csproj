@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>MapDescShow</AssemblyName>
+    <RootNamespace>MapDescShow</RootNamespace>
+    <AssemblyTitle>MapDesc 地图标注编辑器 - QQ8957277</AssemblyTitle>
+    <Product>MapDesc 地图标注编辑器</Product>
+    <Company>QQ8957277</Company>
+    <Version>1.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Optimize>true</Optimize>
+    <Deterministic>true</Deterministic>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj-next\**;bin-next\**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>
