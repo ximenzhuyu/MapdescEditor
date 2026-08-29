@@ -52,6 +52,8 @@ public sealed class MainForm : Form
     public MainForm()
     {
         Text = "MapDesc 地图标注编辑器（自动备份） - QQ8957277";
+        Icon? applicationIcon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        if (applicationIcon is not null) Icon = applicationIcon;
         Width = 1500;
         Height = 920;
         MinimumSize = new Size(1100, 700);
@@ -219,13 +221,15 @@ public sealed class MainForm : Form
         update.Click += (_, _) => UpdateSelected();
         var delete = new Button { Text = "－ 删除选中", AutoSize = true };
         delete.Click += (_, _) => DeleteSelected();
+        var save = new Button { Text = "保存", AutoSize = true };
+        save.Click += (_, _) => SaveToClient();
         var hint = new Label
         {
             Text = "选中行会自动打开对应地图；方向键移动坐标",
             AutoSize = true, Anchor = AnchorStyles.Left, ForeColor = Color.DimGray
         };
         var toolbar = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, WrapContents = true, Padding = new Padding(3) };
-        toolbar.Controls.AddRange([add, update, delete, hint]);
+        toolbar.Controls.AddRange([add, update, delete, save, hint]);
 
         var search = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 5, Padding = new Padding(3, 0, 3, 3) };
         search.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
