@@ -833,7 +833,11 @@ public sealed class MainForm : Form
 
     private void ShowOperationGuide()
     {
-        const string guide = """
+        Version? assemblyVersion = typeof(MainForm).Assembly.GetName().Version;
+        string displayVersion = assemblyVersion is null
+            ? "未知"
+            : $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.Build}";
+        string guide = $"软件版本：v{displayVersion}\n\n" + """
             1. 选择客户端目录
             选择包含 Map 和 data 文件夹的客户端根目录。
             程序会读取客户端 data\MapDesc1.dat。
