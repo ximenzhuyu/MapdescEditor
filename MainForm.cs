@@ -51,7 +51,7 @@ public sealed class MainForm : Form
 
     public MainForm()
     {
-        Text = "MapDesc 地图标注编辑器 - QQ8957277";
+        Text = "MapDesc 地图标注编辑器 - 作者QQ8957277";
         Icon? applicationIcon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         if (applicationIcon is not null) Icon = applicationIcon;
         Width = 1500;
