@@ -174,21 +174,18 @@ public sealed class MainForm : Form
             table.Controls.Add(new Label { Text = label, AutoSize = true, Anchor = AnchorStyles.Left }, 0, row);
             table.Controls.Add(control, 1, row);
         }
-        var identity = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 6 };
-        identity.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        var identity = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 5 };
         identity.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
         identity.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         identity.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90));
         identity.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         identity.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90));
-        identity.Controls.Add(new Label { Text = "地图", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(0, 6, 8, 0) }, 0, 0);
-        identity.Controls.Add(_mapKeyBox, 1, 0);
-        identity.Controls.Add(new Label { Text = "X", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(10, 6, 5, 0) }, 2, 0);
-        identity.Controls.Add(_xBox, 3, 0);
-        identity.Controls.Add(new Label { Text = "Y", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(10, 6, 5, 0) }, 4, 0);
-        identity.Controls.Add(_yBox, 5, 0);
-        table.Controls.Add(identity, 0, 0);
-        table.SetColumnSpan(identity, 2);
+        identity.Controls.Add(_mapKeyBox, 0, 0);
+        identity.Controls.Add(new Label { Text = "X", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(10, 6, 5, 0) }, 1, 0);
+        identity.Controls.Add(_xBox, 2, 0);
+        identity.Controls.Add(new Label { Text = "Y", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(10, 6, 5, 0) }, 3, 0);
+        identity.Controls.Add(_yBox, 4, 0);
+        Row("地图", identity, 0);
         Row("说明", _textBox, 1);
 
         var colorPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 3, RowCount = 2 };
@@ -206,7 +203,7 @@ public sealed class MainForm : Form
         Row("颜色", colorPanel, 2);
         var modes = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true };
         modes.Controls.AddRange([_largeModeBox, _miniModeBox]);
-        Row("显示模式", modes, 3);
+        Row("模式", modes, 3);
         var state = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true };
         state.Controls.AddRange([_enabledBox, _autoBackupBox]);
         Row("状态", state, 4);
