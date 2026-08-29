@@ -904,7 +904,8 @@ public sealed class MainForm : Form
             ReadOnly = true,
             ScrollBars = ScrollBars.Vertical,
             BackColor = SystemColors.Window,
-            Text = guide,
+            // WinForms 文本框使用 CRLF，显式转换可确保每个章节换行及章节间空行正常显示。
+            Text = guide.ReplaceLineEndings("\r\n"),
             Font = new Font(Font.FontFamily, 10),
             Margin = new Padding(10)
         };
