@@ -83,6 +83,8 @@ public sealed class MainForm : Form
         rootButton.Click += (_, _) => ChooseClientRoot();
         var mapInfoButton = new Button { Text = "选择 MapInfo.txt", AutoSize = true };
         mapInfoButton.Click += (_, _) => ChooseMapInfo();
+        var helpButton = new Button { Text = "操作说明", AutoSize = true };
+        helpButton.Click += (_, _) => ShowOperationGuide();
         var loadDescButton = new Button { Text = "重读 MapDesc1.dat", AutoSize = true };
         loadDescButton.Click += (_, _) => LoadMapDesc(_productionMapDescPath);
         var saveButton = new Button { Text = "另存为…", AutoSize = true };
@@ -104,6 +106,7 @@ public sealed class MainForm : Form
         top.Controls.Add(new Label { Text = "服务端 MapInfo：", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 1);
         top.Controls.Add(_mapInfoBox, 1, 1);
         top.Controls.Add(mapInfoButton, 2, 1);
+        top.Controls.Add(helpButton, 3, 1);
 
         var left = new Panel { Dock = DockStyle.Fill, Padding = new Padding(5) };
         left.Controls.Add(_mapList);
@@ -826,6 +829,75 @@ public sealed class MainForm : Form
             MessageBox.Show(this, "保存未完成。原文件不会在备份失败时被覆盖。\n\n" + ex.Message,
                 "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
+
+    private void ShowOperationGuide()
+    {
+        const string guide = """
+            1. 选择客户端目录
+               选择包含 Map 和 data 文件夹的客户端根目录，程序会读取 data\MapDesc1.dat。
+
+            2. 选择 MapInfo.txt
+               选择服务端 Mir200\Envir\MapInfo.txt。地图名称以 MapInfo 中的配置为准，同一个 .map 文件可以对应多个地图名称。
+
+            3. 查看与定位
+               左侧选择地图后，中间显示可移动区域预览，右侧联动显示该地图的备注。黑色表示禁止移动，绿色表示可以移动。
+               选择右侧备注后，预览区用红色十字标出对应坐标。
+
+            4. 调整坐标
+               选中右侧备注后，使用键盘方向键移动坐标。按住 Alt 再按方向键，可同时调整模式 0 和模式 1 的对应备注。
+
+            5. 新增、修改和删除
+               在预览区目标位置点击鼠标右键，选择添加描述点，填写说明并选择颜色。
+               也可以填写右上方内容后使用“新增备注”“更新选中”或“删除选中”。
+
+            6. 显示模式
+               大地图(0)和小地图(1)可以同时勾选；同时勾选时会为两种模式建立对应记录。
+
+            7. 搜索
+               地图名和说明搜索框默认进行包含匹配。勾选搜索框旁的复选框后改为完全匹配；鼠标移到复选框上可查看提示。
+
+            8. 保存
+               点击“保存”或“保存到客户端”写入当前客户端的 MapDesc1.dat。
+               勾选“保存前自动备份”时，会先在原目录生成带时间戳的 .bak 文件；备份失败则中止保存。
+               “另存为…”用于把当前内容保存到其他文件，不覆盖客户端文件。
+            """;
+
+        Icon? guideIcon = Icon is null ? null : (Icon)Icon.Clone();
+        using var dialog = new Form
+        {
+            Text = "操作说明",
+            StartPosition = FormStartPosition.CenterParent,
+            Size = new Size(720, 620),
+            MinimumSize = new Size(560, 420),
+            ShowInTaskbar = false,
+            Icon = guideIcon
+        };
+        var text = new TextBox
+        {
+            Dock = DockStyle.Fill,
+            Multiline = true,
+            ReadOnly = true,
+            ScrollBars = ScrollBars.Vertical,
+            BackColor = SystemColors.Window,
+            Text = guide,
+            Font = new Font(Font.FontFamily, 10),
+            Margin = new Padding(10)
+        };
+        var close = new Button { Text = "关闭", AutoSize = true, DialogResult = DialogResult.OK };
+        var buttons = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Bottom,
+            Height = 48,
+            FlowDirection = FlowDirection.RightToLeft,
+            Padding = new Padding(8)
+        };
+        buttons.Controls.Add(close);
+        dialog.Controls.Add(text);
+        dialog.Controls.Add(buttons);
+        dialog.AcceptButton = close;
+        dialog.CancelButton = close;
+        dialog.ShowDialog(this);
     }
 
     private void ShowError(Exception ex) => MessageBox.Show(this, ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
