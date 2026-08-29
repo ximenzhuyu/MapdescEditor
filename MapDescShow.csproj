@@ -13,9 +13,9 @@
     <AssemblyTitle>MapDesc 地图标注编辑器 - QQ8957277</AssemblyTitle>
     <Product>MapDesc 地图标注编辑器</Product>
     <Company>QQ8957277</Company>
-    <Version>1.0.2</Version>
-    <FileVersion>1.0.2.0</FileVersion>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <Version>1.0.3</Version>
+    <FileVersion>1.0.3.0</FileVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
     <Optimize>true</Optimize>
     <Deterministic>true</Deterministic>
     <DefaultItemExcludes>$(DefaultItemExcludes);obj-next\**;bin-next\**</DefaultItemExcludes>

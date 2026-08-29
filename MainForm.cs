@@ -89,25 +89,21 @@ public sealed class MainForm : Form
         saveButton.Click += (_, _) => SaveAs();
         var saveClientButton = new Button { Text = "保存到客户端", AutoSize = true };
         saveClientButton.Click += (_, _) => SaveToClient();
-        var fitButton = new Button { Text = "适应窗口", AutoSize = true };
-        fitButton.Click += (_, _) => _canvas.FitToWindow();
 
-        var top = new TableLayoutPanel { Dock = DockStyle.Top, Height = 76, ColumnCount = 8, RowCount = 2, Padding = new Padding(6) };
+        var top = new TableLayoutPanel { Dock = DockStyle.Top, Height = 76, ColumnCount = 6, RowCount = 2, Padding = new Padding(6) };
         top.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         top.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-        for (int i = 2; i < 8; i++) top.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        for (int i = 2; i < 6; i++) top.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         top.Controls.Add(new Label { Text = "客户端：", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 0);
         top.Controls.Add(_rootBox, 1, 0);
         top.Controls.Add(rootButton, 2, 0);
         top.Controls.Add(loadDescButton, 3, 0);
         top.Controls.Add(saveButton, 4, 0);
         top.Controls.Add(saveClientButton, 5, 0);
-        top.Controls.Add(fitButton, 6, 0);
 
         top.Controls.Add(new Label { Text = "服务端 MapInfo：", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 1);
         top.Controls.Add(_mapInfoBox, 1, 1);
-        top.SetColumnSpan(_mapInfoBox, 4);
-        top.Controls.Add(mapInfoButton, 5, 1);
+        top.Controls.Add(mapInfoButton, 2, 1);
 
         var left = new Panel { Dock = DockStyle.Fill, Padding = new Padding(5) };
         left.Controls.Add(_mapList);
