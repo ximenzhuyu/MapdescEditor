@@ -83,6 +83,8 @@ public sealed class MainForm : Form
         rootButton.Click += (_, _) => ChooseClientRoot();
         var mapInfoButton = new Button { Text = "选择 MapInfo.txt", AutoSize = true };
         mapInfoButton.Click += (_, _) => ChooseMapInfo();
+        var closePreviewButton = new Button { Text = "关闭预览", AutoSize = true };
+        closePreviewButton.Click += (_, _) => ClosePreview();
         var helpButton = new Button { Text = "操作说明", AutoSize = true };
         helpButton.Click += (_, _) => ShowOperationGuide();
         var loadDescButton = new Button { Text = "重读 MapDesc1.dat", AutoSize = true };
@@ -106,7 +108,8 @@ public sealed class MainForm : Form
         top.Controls.Add(new Label { Text = "服务端 MapInfo：", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 1);
         top.Controls.Add(_mapInfoBox, 1, 1);
         top.Controls.Add(mapInfoButton, 2, 1);
-        top.Controls.Add(helpButton, 3, 1);
+        top.Controls.Add(closePreviewButton, 3, 1);
+        top.Controls.Add(helpButton, 4, 1);
 
         var left = new Panel { Dock = DockStyle.Fill, Padding = new Padding(5) };
         left.Controls.Add(_mapList);
@@ -927,6 +930,16 @@ public sealed class MainForm : Form
         dialog.AcceptButton = close;
         dialog.CancelButton = close;
         dialog.ShowDialog(this);
+    }
+
+    private void ClosePreview()
+    {
+        _mapList.ClearSelected();
+        _grid.ClearSelection();
+        _grid.CurrentCell = null;
+        _canvas.SetPreview(null);
+        _preview = null;
+        _status.Text = "已关闭地图预览并清除当前选择。";
     }
 
     private void ShowError(Exception ex) => MessageBox.Show(this, ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
